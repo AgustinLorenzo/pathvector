@@ -108,6 +108,27 @@ protocol bgp {{ UniqueProtocolName $peer.ProtocolName $peerName $af $peer.ASN $p
             if ({{ $asn }} ~ bgp_path) then { bgp_local_pref = {{ $pref }}; }
             {{ end }}
 
+            {{ if BoolDeref $peer.ForcePeerNexthop }}bgp_next_hop = {{ $neighborNoIface }};{{ end }}
+
+            {{ if StrDeref $peer.ImportNextHop }}
+            bgp_next_hop = {{ StrDeref $peer.ImportNextHop }};
+            gw = {{ StrDeref $peer.ImportNextHop }};
+            {{ end }}
+            
+            {{ range $i, $pattern := StringSliceIter $peer.RemoveStandardCommunities }}
+            bgp_community.delete([({{ $pattern }})]);
+            {{ end }}
+            {{ range $i, $pattern := StringSliceIter $peer.RemoveLargeCommunities }}
+            bgp_large_community.delete([({{ $pattern }})]);
+            {{ end }}
+
+            {{ if IntDeref $peer.RemoveAllCommunities }}
+            {{ if lt (IntDeref $peer.RemoveAllCommunities) 65535 }}
+            bgp_community.delete([({{ IntDeref $peer.RemoveAllCommunities }}, *)]);
+            {{ end }}
+            bgp_large_community.delete([({{ IntDeref $peer.RemoveAllCommunities }}, *, *)]);
+            {{ end }}
+
             {{ range $i, $community := StringSliceIter $peer.ImportStandardCommunities }}
             bgp_community.add(({{ $community }}));
             {{ end }}
@@ -146,27 +167,6 @@ protocol bgp {{ UniqueProtocolName $peer.ProtocolName $peerName $af $peer.ASN $p
             {{ end }}
 
             {{ StrDeref $peer.PostImportFilter }}
-
-            {{ if BoolDeref $peer.ForcePeerNexthop }}bgp_next_hop = {{ $neighborNoIface }};{{ end }}
-
-            {{ if StrDeref $peer.ImportNextHop }}
-            bgp_next_hop = {{ StrDeref $peer.ImportNextHop }};
-            gw = {{ StrDeref $peer.ImportNextHop }};
-            {{ end }}
-
-            {{ range $i, $pattern := StringSliceIter $peer.RemoveStandardCommunities }}
-            bgp_community.delete([({{ $pattern }})]);
-            {{ end }}
-            {{ range $i, $pattern := StringSliceIter $peer.RemoveLargeCommunities }}
-            bgp_large_community.delete([({{ $pattern }})]);
-            {{ end }}
-
-            {{ if IntDeref $peer.RemoveAllCommunities }}
-            {{ if lt (IntDeref $peer.RemoveAllCommunities) 65535 }}
-            bgp_community.delete([({{ IntDeref $peer.RemoveAllCommunities }}, *)]);
-            {{ end }}
-            bgp_large_community.delete([({{ IntDeref $peer.RemoveAllCommunities }}, *, *)]);
-            {{ end }}
 
             {{ if BoolDeref $peer.AllowBlackholeCommunity }}process_blackholes();{{ end }}
             {{ if BoolDeref $peer.BlackholeIn }}
