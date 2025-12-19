@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"sort"
 	"strings"
 
 	"github.com/fatih/color"
@@ -29,6 +30,29 @@ func init() {
 	statusCmd.Flags().BoolVar(&showTags, "tags", false, "show tags column")
 	statusCmd.Flags().StringArrayVarP(&tagFilter, "filter", "f", []string{}, "tags to filter by")
 	rootCmd.AddCommand(statusCmd)
+}
+
+// Define the prefix order for sorting (case insensitive)
+var prefixOrder = []string{
+	"internal",
+	"transit",
+	"collector",
+	"rs",
+	"peer",
+	"client",
+	"downstream",
+}
+
+// getPrefixPriority returns the priority of a protocol name based on its prefix (case insensitive)
+func getPrefixPriority(name string) int {
+	lowerName := strings.ToLower(name)
+	for i, prefix := range prefixOrder {
+		if strings.HasPrefix(lowerName, prefix) {
+			return i
+		}
+	}
+	// If no prefix matches, put it at the end
+	return len(prefixOrder)
 }
 
 var statusCmd = &cobra.Command{
@@ -62,6 +86,38 @@ var statusCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		// Sort protocol states: non-BGP first (in original order), then BGP (by prefix and alphabetically)
+		sort.SliceStable(protocolStates, func(i, j int) bool {
+			// Check if protocols are BGP or non-BGP
+			iIsBGP := protocolStates[i].BGP != nil
+			jIsBGP := protocolStates[j].BGP != nil
+
+			// Non-BGP protocols always come first
+			if !iIsBGP && jIsBGP {
+				return true
+			}
+			if iIsBGP && !jIsBGP {
+				return false
+			}
+
+			// If both are non-BGP, keep original order (stable sort handles this)
+			if !iIsBGP && !jIsBGP {
+				return false
+			}
+
+			// Both are BGP protocols - sort by prefix priority, then alphabetically
+			priorityI := getPrefixPriority(protocolStates[i].Name)
+			priorityJ := getPrefixPriority(protocolStates[j].Name)
+
+			// First compare by prefix priority
+			if priorityI != priorityJ {
+				return priorityI < priorityJ
+			}
+
+			// If same prefix priority, sort alphabetically (case insensitive)
+			return strings.ToLower(protocolStates[i].Name) < strings.ToLower(protocolStates[j].Name)
+		})
 
 		header := []string{"Peer", "AS", "Neighbor", "State", "In", "Out", "Since", "Info"}
 		if showTags {
