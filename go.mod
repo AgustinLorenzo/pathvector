@@ -9,7 +9,7 @@ require (
 	github.com/go-playground/validator/v10 v10.12.0
 	github.com/natesales/logknife v0.0.4-0.20230403055117-5e928ad4153b
 	github.com/olekukonko/tablewriter v0.0.5
-	github.com/sirupsen/logrus v1.9.0
+	github.com/sirupsen/logrus v1.9.1
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/mod v0.29.0
