@@ -71,6 +71,9 @@ func networkInfo(asn uint32, queryTimeout uint, apiKey string) (*Data, error) {
 	httpClient := http.Client{Timeout: time.Second * time.Duration(queryTimeout)}
 	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf(Endpoint+"/net?asn=%d", asn), nil)
 
+	// Add explicit User-Agent
+	req.Header.Set("User-Agent", "pathvector/7.0 (https://github.com/AgustinLorenzo/pathvector)")
+
 	if apiKey != "" {
 		req.Header.Add("AUTHORIZATION", "Api-Key "+apiKey)
 	} else if os.Getenv("PEERINGDB_API_KEY") != "" {
@@ -177,6 +180,9 @@ func NeverViaRouteServers(queryTimeout uint, apiKey string) ([]uint32, error) {
 		return nil, fmt.Errorf("PeeringDB GET: %s", err)
 	}
 
+	// Add explicit User-Agent
+	req.Header.Set("User-Agent", "pathvector/7.0 (https://github.com/AgustinLorenzo/pathvector)")
+
 	if apiKey != "" {
 		req.Header.Add("AUTHORIZATION", "Api-Key "+apiKey)
 	} else {
@@ -222,6 +228,9 @@ func IXLANs(asn uint32, peeringDbQueryTimeout uint, apiKey string) ([]IxLanData,
 	if err != nil {
 		return nil, fmt.Errorf("PeeringDB GET (This peer might not have a PeeringDB page): %s", err)
 	}
+
+	// Add explicit User-Agent
+	req.Header.Set("User-Agent", "pathvector/7.0 (https://github.com/AgustinLorenzo/pathvector)")
 
 	if apiKey != "" {
 		req.Header.Add("AUTHORIZATION", "Api-Key "+apiKey)
