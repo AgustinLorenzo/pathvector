@@ -1,6 +1,6 @@
 module github.com/AgustinLorenzo/pathvector
 
-go 1.24.0
+go 1.26.0
 
 require (
 	github.com/creasty/defaults v1.8.0
