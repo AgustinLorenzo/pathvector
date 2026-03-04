@@ -277,16 +277,16 @@ func Reformat(input string) string {
 }
 
 type Routes struct {
-	Imported  int
+	Imported  int64
 	Filtered  int
-	Exported  int
+	Exported  int64
 	Preferred int
 }
 
 type BGPState struct {
 	NeighborAddress string
-	NeighborAS      int
-	LocalAS         int
+	NeighborAS      int64
+	LocalAS         int64
 	NeighborID      string
 }
 
@@ -340,11 +340,11 @@ func parseBGP(s string) (*BGPState, error) {
 		),
 	)
 	neighborAS = strings.Split(neighborAS, "Neighbor AS: ")[1]
-	neighborASInt, err := strconv.ParseInt(neighborAS, 10, 32)
+	neighborASInt, err := strconv.ParseInt(neighborAS, 10, 64)
 	if err != nil {
 		return nil, err
 	}
-	out.NeighborAS = int(neighborASInt)
+	out.NeighborAS = int64(neighborASInt)
 
 	localASRegex := regexp.MustCompile(`(.*)Local AS:(.*)`)
 	localAS := trimRepeatingSpace(
@@ -353,11 +353,11 @@ func parseBGP(s string) (*BGPState, error) {
 		),
 	)
 	localAS = strings.Split(localAS, "Local AS: ")[1]
-	localASInt, err := strconv.ParseInt(localAS, 10, 32)
+	localASInt, err := strconv.ParseInt(localAS, 10, 64)
 	if err != nil {
 		return nil, err
 	}
-	out.LocalAS = int(localASInt)
+	out.LocalAS = int64(localASInt)
 
 	neighborIDRegex := regexp.MustCompile(`(.*)Neighbor ID:(.*)`)
 	neighborID := trimRepeatingSpace(
@@ -401,11 +401,11 @@ func parseRoutes(s string) (*Routes, error) {
 		}
 		switch parts[1] {
 		case "imported":
-			out.Imported = int(num)
+			out.Imported = int64(num)
 		case "filtered":
 			out.Filtered = int(num)
 		case "exported":
-			out.Exported = int(num)
+			out.Exported = int64(num)
 		case "preferred":
 			out.Preferred = int(num)
 		}

@@ -120,7 +120,7 @@ func containsAny(a []string, b []string) bool {
 	return false
 }
 
-func parseTableInt(i int) string {
+func parseTableInt(i int64) string {
 	if i == -1 {
 		return ""
 	}
