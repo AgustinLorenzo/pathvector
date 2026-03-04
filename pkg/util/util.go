@@ -10,6 +10,7 @@ import (
 	"unicode"
 
 	"github.com/olekukonko/tablewriter"
+	"github.com/olekukonko/tablewriter/tw"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 )
@@ -101,21 +102,38 @@ func PrintStructInfo(label string, instance interface{}) {
 
 // PrintTable prints a table of data
 func PrintTable(header []string, data [][]string) {
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader(header)
-	table.SetAutoFormatHeaders(true)
-	table.SetHeaderAlignment(tablewriter.ALIGN_LEFT)
-	table.SetAlignment(tablewriter.ALIGN_LEFT)
-	table.SetCenterSeparator("")
-	table.SetColumnSeparator("")
-	table.SetRowSeparator("")
-	table.SetHeaderLine(false)
-	table.SetBorder(false)
-	table.SetTablePadding("  ")
-	table.SetNoWhiteSpace(true)
-	table.SetAutoWrapText(false)
-	table.AppendBulk(data)
-	table.Render()
+    table := tablewriter.NewTable(os.Stdout,
+        tablewriter.WithConfig(tablewriter.Config{
+            Header: tw.CellConfig{
+                Formatting: tw.CellFormatting{
+                    AutoFormat: tw.Off,
+                    Alignment:  tw.AlignLeft,
+                },
+            },
+            Row: tw.CellConfig{
+                Formatting: tw.CellFormatting{
+                    Alignment: tw.AlignLeft,
+                },
+            },
+        }),
+        tablewriter.WithRendition(tw.Rendition{
+            Borders: tw.BorderNone,
+            Settings: tw.Settings{
+                Separators: tw.Separators{
+                    BetweenColumns: tw.Off,
+                    BetweenRows:    tw.Off,
+                },
+                Lines: tw.Lines{
+                    ShowHeaderLine: tw.Off,
+                },
+            },
+        }),
+    )
+    table.Header(header)
+    for _, row := range data {
+        table.Append(row)
+    }
+    table.Render()
 }
 
 // RemoveFileGlob removes files by glob
