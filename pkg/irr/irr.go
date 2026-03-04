@@ -10,7 +10,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/natesales/pathvector/pkg/config"
+	"github.com/AgustinLorenzo/pathvector/pkg/config"
 )
 
 // withSourceFilter returns the AS set or AS set with the IRR source replaced with the -S SOURCE syntax

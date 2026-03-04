@@ -1,4 +1,4 @@
-module github.com/natesales/pathvector
+module github.com/AgustinLorenzo/pathvector
 
 go 1.24.0
 

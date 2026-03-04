@@ -7,7 +7,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/natesales/pathvector/cmd"
+	"github.com/AgustinLorenzo/pathvector/cmd"
 )
 
 // Build process flags
@@ -24,7 +24,7 @@ func main() {
 	version == "devel" || strings.Contains(version, "SNAPSHOT") {
 		fmt.Fprintln(os.Stderr, `*******************************************************************************
 WARNING: This is a development build. It is not recommended for production use.
-Please submit any bugs to https://github.com/natesales/pathvector/issues
+Please submit any bugs to https://github.com/AgustinLorenzo/pathvector/issues
 *******************************************************************************`)
 	}
 

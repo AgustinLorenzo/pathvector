@@ -8,9 +8,9 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/natesales/pathvector/pkg/bird"
-	"github.com/natesales/pathvector/pkg/plugin"
-	"github.com/natesales/pathvector/pkg/process"
+	"github.com/AgustinLorenzo/pathvector/pkg/bird"
+	"github.com/AgustinLorenzo/pathvector/pkg/plugin"
+	"github.com/AgustinLorenzo/pathvector/pkg/process"
 )
 
 func init() {

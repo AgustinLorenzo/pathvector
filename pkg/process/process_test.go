@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/natesales/pathvector/pkg/util"
+	"github.com/AgustinLorenzo/pathvector/pkg/util"
 )
 
 func TestCategorizeCommunity(t *testing.T) {

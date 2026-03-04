@@ -6,7 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/natesales/pathvector/pkg/config"
+	"github.com/AgustinLorenzo/pathvector/pkg/config"
 )
 
 var plugins = make(map[string]Plugin)

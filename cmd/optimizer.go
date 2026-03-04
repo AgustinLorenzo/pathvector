@@ -6,7 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/natesales/pathvector/pkg/optimizer"
+	"github.com/AgustinLorenzo/pathvector/pkg/optimizer"
 )
 
 func init() {

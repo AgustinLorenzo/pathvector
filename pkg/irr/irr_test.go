@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/natesales/pathvector/pkg/config"
-	"github.com/natesales/pathvector/pkg/util"
+	"github.com/AgustinLorenzo/pathvector/pkg/config"
+	"github.com/AgustinLorenzo/pathvector/pkg/util"
 )
 
 const irrQueryTimeout = 10

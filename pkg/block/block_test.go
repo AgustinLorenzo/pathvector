@@ -34,6 +34,6 @@ func TestBlockParse(t *testing.T) {
 }
 
 func TestBlockCombine(t *testing.T) {
-	combined := Combine([]string{"AS65530"}, []string{"https://raw.githubusercontent.com/natesales/pathvector/main/tests/blocklist.txt"}, []string{"../../tests/blocklist.txt"})
+	combined := Combine([]string{"AS65530"}, []string{"https://raw.githubusercontent.com/AgustinLorenzo/pathvector/main/tests/blocklist.txt"}, []string{"../../tests/blocklist.txt"})
 	assert.Len(t, combined, 19) // This only combines, doesn't sanitize so newlines and comments are included
 }

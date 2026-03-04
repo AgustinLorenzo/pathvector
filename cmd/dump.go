@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 
-	"github.com/natesales/pathvector/pkg/util"
+	"github.com/AgustinLorenzo/pathvector/pkg/util"
 )
 
 var (

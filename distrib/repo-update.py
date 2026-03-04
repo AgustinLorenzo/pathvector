@@ -39,7 +39,7 @@ def sys_exec(command):
 
 
 # Download assets
-release = requests.get("https://api.github.com/repos/natesales/pathvector/releases/latest").json()
+release = requests.get("https://api.github.com/repos/AgustinLorenzo/pathvector/releases/latest").json()
 for asset in release["assets"]:
     plat = from_platform(asset["name"])
     if plat is not None:  # Skip files that don't contain a platform identifier
