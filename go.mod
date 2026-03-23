@@ -4,7 +4,7 @@ go 1.26.1
 
 require (
 	github.com/creasty/defaults v1.8.0
-	github.com/fatih/color v1.18.0
+	github.com/fatih/color v1.19.0
 	github.com/go-ping/ping v1.2.0
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/natesales/logknife v0.0.4-0.20230403055117-5e928ad4153b
@@ -38,6 +38,6 @@ require (
 	golang.org/x/crypto v0.46.0 // indirect
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.39.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 )
