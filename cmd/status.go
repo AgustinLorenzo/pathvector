@@ -139,6 +139,10 @@ var statusCmd = &cobra.Command{
 					if p, found := protocols[protocolState.Name]; found {
 						protocolName = p.Name
 						tags = p.Tags
+						// Override the AS column with a custom display string if configured
+						if p.ASDisplay != "" {
+							neighborAS = p.ASDisplay
+						}
 					}
 
 					if len(tagFilter) == 0 || containsAny(tagFilter, tags) {
