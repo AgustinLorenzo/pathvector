@@ -30,8 +30,9 @@ type Wrapper struct {
 }
 
 type Protocol struct {
-	Name string
-	Tags []string
+	Name      string
+	Tags      []string
+	ASDisplay string
 }
 
 // ProtocolNames gets a map of protocol names to user defined names
@@ -192,7 +193,7 @@ var funcMap = template.FuncMap{
 	},
 
 	// UniqueProtocolName takes a protocol-safe string and address family and returns a unique protocol name
-	"UniqueProtocolName": func(s, userSuppliedName *string, af string, asn *int, tags *[]string) string {
+	"UniqueProtocolName": func(s, userSuppliedName *string, af string, asn *int, tags *[]string, asDisplay *string) string {
 		protoName := fmt.Sprintf("%s_AS%d_v%s", *s, *asn, af)
 		i := 1
 		for {
@@ -202,10 +203,15 @@ var funcMap = template.FuncMap{
 				if tags != nil {
 					t = *tags
 				}
+				var ad string
+				if asDisplay != nil {
+					ad = *asDisplay
+				}
 				protocolNameMapLock.Lock()
 				protocolNameMap[protoName] = &Protocol{
-					Name: *userSuppliedName,
-					Tags: t,
+					Name:      *userSuppliedName,
+					Tags:      t,
+					ASDisplay: ad,
 				}
 				protocolNameMapLock.Unlock()
 				return protoName

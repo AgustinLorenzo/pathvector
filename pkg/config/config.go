@@ -96,6 +96,7 @@ type Peer struct {
 	Description *string   `yaml:"description" description:"Peer description" default:"-"`
 	Comments    *[]string `yaml:"comments" description:"Comments in file" default:"-"`
 	Tags        *[]string `yaml:"tags" description:"Peer tags" default:"-"`
+	ASDisplay   *string   `yaml:"as-display" description:"Custom text to show in the AS column of 'pathvector status' instead of the neighbor ASN (e.g. '600685 (DP)')" default:"-"`
 	Disabled    *bool     `yaml:"disabled" description:"Should the sessions be disabled?" default:"false"`
 
 	Import *bool `yaml:"import" description:"Import routes from this peer" default:"true"`
