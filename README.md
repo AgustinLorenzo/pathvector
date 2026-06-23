@@ -1,3 +1,5 @@
+This repository is a community-maintained fork of [Pathvector](https://github.com/natesales/pathvector), originally developed and maintained by [Nate Sales](https://github.com/natesales).
+
 <img alt="Pathvector Logo" src="https://pathvector.io/img/black-border.svg" height="200" />
 
 Pathvector is a declarative edge routing platform that automates route optimization and control plane configuration with
@@ -5,7 +7,6 @@ secure and repeatable routing policy.
 
 [![Docs](https://img.shields.io/static/v1?label=docs&message=pathvector.io&color=9407cd&style=for-the-badge)](https://pathvector.io)
 [![Go Report](https://goreportcard.com/badge/github.com/AgustinLorenzo/pathvector?style=for-the-badge)](https://goreportcard.com/report/github.com/AgustinLorenzo/pathvector)
-[![CII Best Practices](https://img.shields.io/static/v1?label=CII%20Best%20Practices&message=passing&color=green&style=for-the-badge)](https://bestpractices.coreinfrastructure.org/projects/5328)
 
 Check out the [installation page](https://pathvector.io/docs/installation),
 [practical examples](https://pathvector.io/docs/examples), and

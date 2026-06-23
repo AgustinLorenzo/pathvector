@@ -2,4 +2,4 @@
 
 ### Reporting a Vulnerability
 
-Please **DO NOT** file a public issue, instead send your report to info@pathvector.io
+Please **DO NOT** file a public issue, instead send your report to pathvector@agustinls.com
