@@ -6,13 +6,13 @@ require (
 	github.com/creasty/defaults v1.8.0
 	github.com/fatih/color v1.19.0
 	github.com/go-ping/ping v1.2.0
-	github.com/go-playground/validator/v10 v10.30.2
+	github.com/go-playground/validator/v10 v10.30.3
 	github.com/natesales/logknife v0.0.4-0.20230403055117-5e928ad4153b
 	github.com/olekukonko/tablewriter v1.1.4
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
-	golang.org/x/mod v0.35.0
+	golang.org/x/mod v0.36.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -35,9 +35,9 @@ require (
 	github.com/olekukonko/ll v0.1.6 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.9 // indirect
-	golang.org/x/crypto v0.49.0 // indirect
-	golang.org/x/net v0.51.0 // indirect
+	golang.org/x/crypto v0.52.0 // indirect
+	golang.org/x/net v0.54.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.42.0 // indirect
-	golang.org/x/text v0.35.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 )
