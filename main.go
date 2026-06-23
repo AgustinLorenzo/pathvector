@@ -17,8 +17,6 @@ var (
 	date    = "unknown"
 )
 
-//go:generate ./docs/generate.sh
-
 func main() {
 	if //goland:noinspection GoBoolExpressions
 	version == "devel" || strings.Contains(version, "SNAPSHOT") {

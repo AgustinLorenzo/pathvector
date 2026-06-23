@@ -1,3 +1,4 @@
+version: 2
 before:
   hooks:
     - go generate
@@ -9,31 +10,28 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - freebsd
     goarch:
       - amd64
-      - arm64
-      - mips64
 
 changelog:
-  sort: asc
+  use: github
+  sort: desc
   filters:
     exclude:
-      - '^docs:'
       - '^test:'
 
 nfpms:
   - id: pathvector
     package_name: pathvector
     file_name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
-    vendor: Nate Sales
-    homepage: https://pathvector.io
-    maintainer: Nate Sales <nate@natesales.net>
-    description: Pathvector is a declarative edge routing platform that automates route optimization and control plane configuration with secure and repeatable routing policy.
+    vendor: Agustin Lorenzo
+    homepage: https://github.com/AgustinLorenzo/pathvector
+    maintainer: Agustin Lorenzo <agustin.lorenzo@thinco.es>
+    description: Community-maintained fork of Pathvector, a declarative edge routing platform that automates route optimization and control plane configuration with secure and repeatable routing policy.
     license: MIT
     section: utils
     priority: extra
-    builds:
+    ids:
       - pathvector
 
     formats:
@@ -41,22 +39,9 @@ nfpms:
       - rpm
 
 publishers:
-  # The vendorbuild publisher isn't really a publisher at all. It's a hack to run the vendorbuild/build.sh script
-  # after binaries and packages are built but before the release step so packages for vendor platforms can be
-  # added to the release.
-  - name: vendorbuild
-    cmd: ./vendorbuild/build.sh
-
   - name: fury.io
     ids:
       - pathvector
     dir: "{{ dir .ArtifactPath }}"
-    cmd: curl -s -F package=@{{ .ArtifactName }} https://{{ .Env.FURY_TOKEN }}@push.fury.io/natesales/
+    cmd: curl -s -F package=@{{ .ArtifactName }} https://{{ .Env.FURY_TOKEN }}@push.fury.io/agustinlorenzo/
 
-release:
-  extra_files:
-    - glob: dist/pathvector-*arista*
-    - glob: dist/pathvector-*juniper*
-    - glob: dist/pathvector-*cisco*
-    - glob: dist/pathvector-*mikrotik*
-    - glob: pathvector-*-release.pdf
