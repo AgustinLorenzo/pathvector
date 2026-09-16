@@ -270,7 +270,7 @@ protocol bgp {{ UniqueProtocolName $peer.ProtocolName $peerName $af $peer.ASN $p
             {{ if not (Empty $peer.OnlyAnnounce) }}
             if !(net ~ [
             {{ BirdSet $peer.OnlyAnnounce }}
-            ]) then _reject("prefix not in only-announce list");
+            ]) then {{ if BoolDeref $peer.LogOnlyAnnounceRejects }}_reject("prefix not in only-announce list"){{ else }}reject{{ end }};
             {{ end }}
 
             {{ if BoolDeref $peer.AnnounceOriginated }}
