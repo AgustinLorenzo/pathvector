@@ -198,6 +198,7 @@ type Peer struct {
 
 	DontAnnounce *[]string `yaml:"dont-announce" description:"Don't announce these prefixes to the peer" default:"-"`
 	OnlyAnnounce *[]string `yaml:"only-announce" description:"Only announce these prefixes to the peer" default:"-"`
+	LogDontAnnounceRejects *bool `yaml:"log-dont-announce-rejects" description:"Should prefixes rejected by dont-announce be logged?" default:"true"`
 	LogOnlyAnnounceRejects *bool `yaml:"log-only-announce-rejects" description:"Should prefixes rejected by only-announce be logged?" default:"true"`
 
 	PrefixCommunities         *map[string][]string `yaml:"prefix-communities" description:"Map of prefix to community list to add to the prefix" default:"-"`

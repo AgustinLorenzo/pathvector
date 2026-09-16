@@ -214,7 +214,7 @@ protocol bgp {{ UniqueProtocolName $peer.ProtocolName $peerName $af $peer.ASN $p
             {{ if not (Empty $peer.DontAnnounce) }}
             if (net ~ [
             {{ BirdSet $peer.DontAnnounce }}
-            ]) then _reject("prefix in dont-announce list");
+            ]) then {{ if BoolDeref $peer.LogDontAnnounceRejects }}_reject("prefix in dont-announce list"){{ else }}reject{{ end }};
             {{ end }}
 
             {{ range $prefix, $communities := StrSliceMapDeref $peer.PrefixStandardCommunities }}
