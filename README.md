@@ -6,7 +6,6 @@ Pathvector is a declarative edge routing platform that automates route optimizat
 secure and repeatable routing policy.
 
 [![Docs](https://img.shields.io/static/v1?label=docs&message=pathvector.io&color=9407cd&style=for-the-badge)](https://pathvector.io)
-[![Go Report](https://goreportcard.com/badge/github.com/AgustinLorenzo/pathvector?style=for-the-badge)](https://goreportcard.com/report/github.com/AgustinLorenzo/pathvector)
 
 Check out the [installation page](https://pathvector.io/docs/installation),
 [practical examples](https://pathvector.io/docs/examples), and
