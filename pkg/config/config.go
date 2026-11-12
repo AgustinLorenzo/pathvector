@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/go-ping/ping"
+	"github.com/prometheus-community/pro-bing"
 )
 
 var defaultTransitASNs = []uint32{
@@ -302,7 +302,7 @@ type Kernel struct {
 // ProbeResult stores a single probe result
 type ProbeResult struct {
 	Time  int64
-	Stats ping.Statistics
+	Stats probing.Statistics
 }
 
 // Optimizer stores route optimizer configuration
