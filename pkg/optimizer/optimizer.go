@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-ping/ping"
+	"github.com/prometheus-community/pro-bing"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/AgustinLorenzo/pathvector/pkg/bird"
@@ -41,10 +41,10 @@ func sameAddressFamily(a string, b string) bool {
 }
 
 // sendPing sends a probe ping to a specified target
-func sendPing(source string, target string, count int, timeout int, udp bool) (*ping.Statistics, error) {
-	pinger, err := ping.NewPinger(target)
+func sendPing(source string, target string, count int, timeout int, udp bool) (*probing.Statistics, error) {
+	pinger, err := probing.NewPinger(target)
 	if err != nil {
-		return &ping.Statistics{}, err
+		return &probing.Statistics{}, err
 	}
 
 	// Set pinger options
@@ -55,7 +55,7 @@ func sendPing(source string, target string, count int, timeout int, udp bool) (*
 
 	// Run the ping
 	if err = pinger.Run(); err != nil {
-		return &ping.Statistics{}, fmt.Errorf("ping: %s", err)
+		return &probing.Statistics{}, fmt.Errorf("ping: %s", err)
 	}
 
 	return pinger.Statistics(), nil // nil error
