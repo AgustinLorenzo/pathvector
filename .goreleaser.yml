@@ -37,11 +37,3 @@ nfpms:
     formats:
       - deb
       - rpm
-
-publishers:
-  - name: fury.io
-    ids:
-      - pathvector
-    dir: "{{ dir .ArtifactPath }}"
-    cmd: curl -s -F package=@{{ .ArtifactName }} https://{{ .Env.FURY_TOKEN }}@push.fury.io/agustinlorenzo/
-
