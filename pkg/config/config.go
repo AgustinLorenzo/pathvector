@@ -119,6 +119,8 @@ type Peer struct {
 	LocalASN               *int      `yaml:"local-asn" description:"Local ASN as defined in the global ASN field" default:"-"`
 	LocalPort              *int      `yaml:"local-port" description:"Local TCP port" default:"179"`
 	NeighborPort           *int      `yaml:"neighbor-port" description:"Neighbor TCP port" default:"179"`
+	HoldTime               *int      `yaml:"hold-time" description:"BGP hold time in seconds" default:"-" validate:"omitempty,gte=0"`
+	KeepaliveTime          *int      `yaml:"keepalive-time" description:"BGP keepalive interval in seconds" default:"-" validate:"omitempty,gte=0"`
 	Passive                *bool     `yaml:"passive" description:"Should we listen passively?" default:"false"`
 	Direct                 *bool     `yaml:"direct" description:"Specify that the neighbor is directly connected" default:"false"`
 	NextHopSelf            *bool     `yaml:"next-hop-self" description:"Should BGP next-hop-self be enabled?" default:"false"`

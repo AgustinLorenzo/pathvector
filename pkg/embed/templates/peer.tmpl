@@ -65,6 +65,8 @@ protocol bgp {{ UniqueProtocolName $peer.ProtocolName $peerName $af $peer.ASN $p
     {{ if BoolDeref $peer.Disabled }}disabled;{{ end }}
     {{ if BoolDeref $peer.Passive }}passive;{{ end }}
     {{ if BoolDeref $peer.Direct }}direct;{{ end }}
+    {{ if $peer.HoldTime }}hold time {{ IntDeref $peer.HoldTime }};{{ end }}
+    {{ if $peer.KeepaliveTime }}keepalive time {{ IntDeref $peer.KeepaliveTime }};{{ end }}
     {{ if BoolDeref $peer.Multihop }}multihop 255;{{ end }}
     {{ if StrDeref $peer.Password }}password "{{ StrDeref $peer.Password }}";{{ end }}
     {{ if BoolDeref $peer.RSClient }}rs client;{{ end }}
