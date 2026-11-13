@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"runtime/debug"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
@@ -17,6 +18,37 @@ var (
 	date    = "unknown"
 )
 
+func buildMetadata() (string, string) {
+	buildCommit, buildDate := commit, date
+	info, ok := debug.ReadBuildInfo()
+	if !ok {
+		return buildCommit, buildDate
+	}
+
+	settings := make(map[string]string, len(info.Settings))
+	for _, setting := range info.Settings {
+		settings[setting.Key] = setting.Value
+	}
+
+	if buildCommit == "unknown" {
+		buildCommit = settings["vcs.revision"]
+		if buildCommit != "" && settings["vcs.modified"] == "true" {
+			buildCommit += "-dirty"
+		}
+		if buildCommit == "" {
+			buildCommit = "unknown"
+		}
+	}
+	if buildDate == "unknown" {
+		buildDate = settings["vcs.time"]
+		if buildDate == "" {
+			buildDate = "unknown"
+		}
+	}
+
+	return buildCommit, buildDate
+}
+
 func main() {
 	if //goland:noinspection GoBoolExpressions
 	version == "devel" || strings.Contains(version, "SNAPSHOT") {
@@ -26,7 +58,8 @@ Please submit any bugs to https://github.com/AgustinLorenzo/pathvector/issues
 *******************************************************************************`)
 	}
 
-	if err := cmd.Execute(version, commit, date); err != nil {
+	buildCommit, buildDate := buildMetadata()
+	if err := cmd.Execute(version, buildCommit, buildDate); err != nil {
 		log.Fatal(err)
 	}
 }
